@@ -2,9 +2,10 @@ let studentsData = [];
 let filteredStudents = [];
 
 async function loadData() {
-  const res = await fetch("students.json");
+  const res = await fetch("students.json"); // Your JSON file
   studentsData = await res.json();
 
+  // Fill branch dropdown
   const branches = [...new Set(studentsData.map(s => s.branch))];
   const branchSelect = document.getElementById("branch");
   branches.forEach(b => {
@@ -13,6 +14,8 @@ async function loadData() {
     opt.textContent = b;
     branchSelect.appendChild(opt);
   });
+
+  filteredStudents = studentsData;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -22,12 +25,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const studentInput = document.getElementById("student");
   const suggestions = document.getElementById("suggestions");
   const loginBtn = document.getElementById("loginBtn");
+  const resultDiv = document.getElementById("result");
+  const resId = document.getElementById("resId");
+  const resPass = document.getElementById("resPass");
 
   branchSelect.addEventListener("change", () => {
+    const branch = branchSelect.value;
+    filteredStudents = branch ? studentsData.filter(s => s.branch === branch) : studentsData;
     studentInput.value = "";
-    studentInput.dataset.selectedId = "";
     suggestions.innerHTML = "";
-    filteredStudents = studentsData.filter(s => s.branch === branchSelect.value);
+    suggestions.style.display = "none";
   });
 
   studentInput.addEventListener("input", () => {
@@ -37,15 +44,19 @@ document.addEventListener("DOMContentLoaded", () => {
       suggestions.style.display = "none";
       return;
     }
-    const matches = filteredStudents.filter(s => s.name.toLowerCase().includes(query));
+
+    const matches = filteredStudents.filter(s =>
+      s.name.toLowerCase().includes(query) || s.id.toLowerCase().includes(query)
+    );
+
     if (matches.length) {
       matches.forEach(m => {
         const li = document.createElement("li");
-        li.textContent = `${m.name} (${m.id})`;
+        li.textContent = `${m.branch}-${m.name} (${m.id})`;
         li.onclick = () => {
           studentInput.value = m.name;
           studentInput.dataset.selectedId = m.id;
-          studentInput.dataset.password = m.password;
+          studentInput.dataset.selectedPassword = m.password;
           suggestions.innerHTML = "";
           suggestions.style.display = "none";
         };
@@ -59,32 +70,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
   loginBtn.addEventListener("click", () => {
     const id = studentInput.dataset.selectedId;
-    const password = studentInput.dataset.password;
+    const password = studentInput.dataset.selectedPassword;
 
     if (!id || !password) {
       alert("Please select a student from the suggestions.");
       return;
     }
 
-    // Create hidden form to auto-submit
-    const form = document.createElement("form");
-    form.method = "POST";
-    form.action = "https://vvit-erp.edunxt.co.in/student/login";
-    form.target = "_self";
+    resId.textContent = id;
+    resPass.textContent = password;
+    resultDiv.style.display = "block";
+  });
 
-    const inputId = document.createElement("input");
-    inputId.type = "text";
-    inputId.name = "roll_no";  // must match login form field name
-    inputId.value = id;
+  document.getElementById("copyId").addEventListener("click", () => {
+    navigator.clipboard.writeText(resId.textContent);
+    alert("ID copied!");
+  });
 
-    const inputPwd = document.createElement("input");
-    inputPwd.type = "hidden";
-    inputPwd.name = "password";  // must match login form field name
-    inputPwd.value = password;
-
-    form.appendChild(inputId);
-    form.appendChild(inputPwd);
-    document.body.appendChild(form);
-    form.submit();
+  document.getElementById("copyPass").addEventListener("click", () => {
+    navigator.clipboard.writeText(resPass.textContent);
+    alert("Password copied!");
   });
 });
