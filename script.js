@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
     form.target = "_self";
 
     const inputId = document.createElement("input");
-    inputId.type = "hidden";
+    inputId.type = "text";
     inputId.name = "roll_no";  // must match login form field name
     inputId.value = id;
 
