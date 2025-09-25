@@ -74,12 +74,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const inputId = document.createElement("input");
     inputId.type = "hidden";
-    inputId.name = "Roll Number";  // must match login form field name
+    inputId.name = "roll_no";  // must match login form field name
     inputId.value = id;
 
     const inputPwd = document.createElement("input");
     inputPwd.type = "hidden";
-    inputPwd.name = "Password";  // must match login form field name
+    inputPwd.name = "password";  // must match login form field name
     inputPwd.value = password;
 
     form.appendChild(inputId);
