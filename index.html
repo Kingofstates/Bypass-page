@@ -9,24 +9,24 @@
 <body>
 <div class="wrapper">
   <div class="card">
-    <h1>Student Mediator</h1>
+    <h1 id="title">Student Mediator</h1>
     
-    <div class="input-group">
+    <div class="input-group fade-in">
       <label for="branch">Branch (optional)</label>
       <select id="branch">
         <option value="">All Branches</option>
       </select>
     </div>
 
-    <div class="input-group">
+    <div class="input-group fade-in">
       <label for="student">Search by Name or ID</label>
       <input type="text" id="student" placeholder="Type name or Roll Number">
       <ul id="suggestions"></ul>
     </div>
 
-    <button id="loginBtn">Show ID & Password</button>
+    <button id="loginBtn" class="fade-in">Show ID & Password</button>
 
-    <div class="result" id="result">
+    <div class="result fade-in" id="result">
       <div class="credential">
         <span>ID: <span id="resId"></span></span>
         <button id="copyId">Copy</button>
