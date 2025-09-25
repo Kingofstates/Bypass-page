@@ -5,7 +5,6 @@ async function loadData() {
   const res = await fetch("students.json");
   studentsData = await res.json();
 
-  // Fill branch dropdown
   const branches = [...new Set(studentsData.map(s => s.branch))];
   const branchSelect = document.getElementById("branch");
   branches.forEach(b => {
@@ -24,15 +23,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const suggestions = document.getElementById("suggestions");
   const loginBtn = document.getElementById("loginBtn");
 
-  // Branch filter
   branchSelect.addEventListener("change", () => {
     studentInput.value = "";
+    studentInput.dataset.selectedId = "";
     suggestions.innerHTML = "";
-    suggestions.style.display = "none";
     filteredStudents = studentsData.filter(s => s.branch === branchSelect.value);
   });
 
-  // Autocomplete
   studentInput.addEventListener("input", () => {
     const query = studentInput.value.toLowerCase();
     suggestions.innerHTML = "";
@@ -48,6 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
         li.onclick = () => {
           studentInput.value = m.name;
           studentInput.dataset.selectedId = m.id;
+          studentInput.dataset.password = m.password;
           suggestions.innerHTML = "";
           suggestions.style.display = "none";
         };
@@ -59,14 +57,34 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Redirect
   loginBtn.addEventListener("click", () => {
     const id = studentInput.dataset.selectedId;
-    if (!id) {
-      alert("Please select a student from suggestions");
+    const password = studentInput.dataset.password;
+
+    if (!id || !password) {
+      alert("Please select a student from the suggestions.");
       return;
     }
-    // Redirect to student page
-    window.location.href = `students/${id}.html`;
+
+    // Create hidden form to auto-submit
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = "https://vvit-erp.edunxt.co.in/student/login";
+    form.target = "_self";
+
+    const inputId = document.createElement("input");
+    inputId.type = "hidden";
+    inputId.name = "username";  // must match login form field name
+    inputId.value = id;
+
+    const inputPwd = document.createElement("input");
+    inputPwd.type = "hidden";
+    inputPwd.name = "password";  // must match login form field name
+    inputPwd.value = password;
+
+    form.appendChild(inputId);
+    form.appendChild(inputPwd);
+    document.body.appendChild(form);
+    form.submit();
   });
 });
