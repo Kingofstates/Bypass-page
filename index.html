@@ -1,27 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Student Mediator</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Mediator</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h2>Student Portal Mediator</h2>
-
-    <label for="branch">Select Branch</label>
+<div class="container">
+  <h1>Student Mediator</h1>
+  
+  <div class="input-group">
+    <label for="branch">Branch (optional):</label>
     <select id="branch">
-      <option value="">--Choose Branch--</option>
+      <option value="">All Branches</option>
     </select>
-
-    <label for="student">Select Student</label>
-    <input id="student" type="text" placeholder="Type student name..." autocomplete="off" />
-
-    <ul id="suggestions"></ul>
-
-    <button id="loginBtn">Go</button>
   </div>
 
-  <script src="script.js"></script>
+  <div class="input-group">
+    <label for="student">Search by Name or ID:</label>
+    <input type="text" id="student" placeholder="Type name or Roll Number">
+    <ul id="suggestions"></ul>
+  </div>
+
+  <button id="loginBtn">Show ID & Password</button>
+
+  <div class="result" id="result">
+    <p>ID: <span id="resId"></span> <button id="copyId">Copy</button></p>
+    <p>Password: <span id="resPass"></span> <button id="copyPass">Copy</button></p>
+  </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
