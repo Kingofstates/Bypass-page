@@ -7,27 +7,35 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="container">
-  <h1>Student Mediator</h1>
-  
-  <div class="input-group">
-    <label for="branch">Branch (optional):</label>
-    <select id="branch">
-      <option value="">All Branches</option>
-    </select>
-  </div>
+<div class="wrapper">
+  <div class="card">
+    <h1>Student Mediator</h1>
+    
+    <div class="input-group">
+      <label for="branch">Branch (optional)</label>
+      <select id="branch">
+        <option value="">All Branches</option>
+      </select>
+    </div>
 
-  <div class="input-group">
-    <label for="student">Search by Name or ID:</label>
-    <input type="text" id="student" placeholder="Type name or Roll Number">
-    <ul id="suggestions"></ul>
-  </div>
+    <div class="input-group">
+      <label for="student">Search by Name or ID</label>
+      <input type="text" id="student" placeholder="Type name or Roll Number">
+      <ul id="suggestions"></ul>
+    </div>
 
-  <button id="loginBtn">Show ID & Password</button>
+    <button id="loginBtn">Show ID & Password</button>
 
-  <div class="result" id="result">
-    <p>ID: <span id="resId"></span> <button id="copyId">Copy</button></p>
-    <p>Password: <span id="resPass"></span> <button id="copyPass">Copy</button></p>
+    <div class="result" id="result">
+      <div class="credential">
+        <span>ID: <span id="resId"></span></span>
+        <button id="copyId">Copy</button>
+      </div>
+      <div class="credential">
+        <span>Password: <span id="resPass"></span></span>
+        <button id="copyPass">Copy</button>
+      </div>
+    </div>
   </div>
 </div>
 
