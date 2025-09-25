@@ -1,105 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
 body {
-  font-family: Arial, sans-serif;
-  background: #f5f5f5;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  margin: 0;
+  color: #fff;
 }
 
-.container {
-  background: #fff;
-  padding: 25px 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-  max-width: 400px;
+.wrapper {
   width: 100%;
+  max-width: 450px;
+  padding: 20px;
+}
+
+.card {
+  background: rgba(20, 20, 20, 0.9);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
 }
 
 h1 {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
+  font-weight: 700;
+  font-size: 1.8rem;
 }
 
 .input-group {
-  margin-bottom: 15px;
   position: relative;
+  margin-bottom: 20px;
 }
 
 label {
   display: block;
   margin-bottom: 5px;
-  font-weight: bold;
+  font-weight: 500;
 }
 
-input, select, button {
+input, select {
   width: 100%;
-  padding: 8px 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+  padding: 12px 15px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
   box-sizing: border-box;
 }
 
+input:focus, select:focus {
+  box-shadow: 0 0 10px #4caf50;
+}
+
 button {
-  background-color: #4CAF50;
-  color: white;
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #4caf50, #81c784);
   border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
   cursor: pointer;
-  margin-top: 10px;
+  color: #fff;
+  transition: 0.3s;
 }
 
 button:hover {
-  background-color: #45a049;
+  background: linear-gradient(135deg, #43a047, #66bb6a);
 }
 
 #suggestions {
   position: absolute;
-  background: #fff;
-  border: 1px solid #ccc;
+  background: #1e1e1e;
+  border-radius: 8px;
   width: 100%;
-  max-height: 150px;
+  max-height: 180px;
   overflow-y: auto;
   display: none;
-  z-index: 1000;
   list-style: none;
-  padding: 0;
   margin: 0;
+  padding: 0;
+  z-index: 1000;
 }
 
 #suggestions li {
-  padding: 5px 10px;
+  padding: 10px 15px;
   cursor: pointer;
+  transition: 0.2s;
 }
 
 #suggestions li:hover {
-  background-color: #f0f0f0;
+  background: #333;
 }
 
 .result {
   display: none;
-  margin-top: 15px;
+  margin-top: 20px;
+  background: #1e1e1e;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
 }
 
-.result p {
+.credential {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #eee;
-  padding: 8px;
-  border-radius: 5px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+  font-weight: 500;
 }
 
-.result button {
+.credential button {
   width: auto;
-  padding: 5px 10px;
+  padding: 6px 12px;
   font-size: 0.9rem;
+  background: linear-gradient(135deg, #2196f3, #64b5f6);
+}
+
+.credential button:hover {
+  background: linear-gradient(135deg, #1976d2, #42a5f5);
 }
 
 @media screen and (max-width: 500px) {
-  .container {
+  .card {
     padding: 20px;
-    max-width: 95%;
+  }
+  h1 {
+    font-size: 1.5rem;
   }
 }
