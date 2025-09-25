@@ -18,10 +18,16 @@ body {
 }
 
 .card {
-  background: rgba(20, 20, 20, 0.9);
+  background: rgba(20, 20, 20, 0.95);
   padding: 30px;
   border-radius: 15px;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+  animation: fadeInCard 1s ease forwards;
+}
+
+@keyframes fadeInCard {
+  from {opacity: 0; transform: translateY(-20px);}
+  to {opacity: 1; transform: translateY(0);}
 }
 
 h1 {
@@ -29,6 +35,20 @@ h1 {
   margin-bottom: 25px;
   font-weight: 700;
   font-size: 1.8rem;
+  overflow: hidden;
+  border-right: .15em solid #4caf50;
+  white-space: nowrap;
+  letter-spacing: .1em;
+  animation: typing 2.5s steps(30, end), blink-caret .75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: #4caf50; }
 }
 
 .input-group {
@@ -50,10 +70,12 @@ input, select {
   outline: none;
   font-size: 1rem;
   box-sizing: border-box;
+  background: #1e1e1e;
+  color: #fff;
 }
 
 input:focus, select:focus {
-  box-shadow: 0 0 10px #4caf50;
+  box-shadow: 0 0 12px #4caf50;
 }
 
 button {
@@ -66,11 +88,12 @@ button {
   font-size: 1rem;
   cursor: pointer;
   color: #fff;
-  transition: 0.3s;
+  transition: all 0.3s ease;
 }
 
 button:hover {
   background: linear-gradient(135deg, #43a047, #66bb6a);
+  transform: scale(1.05);
 }
 
 #suggestions {
@@ -85,6 +108,7 @@ button:hover {
   margin: 0;
   padding: 0;
   z-index: 1000;
+  animation: fadeIn 0.3s ease;
 }
 
 #suggestions li {
@@ -104,6 +128,7 @@ button:hover {
   padding: 15px;
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  animation: fadeIn 0.5s ease forwards;
 }
 
 .credential {
@@ -123,6 +148,15 @@ button:hover {
 
 .credential button:hover {
   background: linear-gradient(135deg, #1976d2, #42a5f5);
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1s forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
 }
 
 @media screen and (max-width: 500px) {
